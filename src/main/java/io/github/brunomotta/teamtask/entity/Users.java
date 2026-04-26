@@ -86,5 +86,12 @@ public class Users {
         this.createAt = createAt;
     }
 
+    public Users(UUID id, String name, String email){
+        this.name = name;
+        this.email = email;
+
+    }
+
+
 
 }
