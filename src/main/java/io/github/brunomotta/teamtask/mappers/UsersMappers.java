@@ -10,13 +10,14 @@ public class UsersMappers {
         return new Users(
                 null,
                 requestDto.name(),
-                requestDto.email()
+                requestDto.email(),
+                requestDto.role()
         );
     }
 
     public static UsersResponseDto toResponse(Users users){
         return new UsersResponseDto(
-                null,
+                users.getId(),
                 users.getName(),
                 users.getEmail(),
                 users.getRole(),
