@@ -2,14 +2,33 @@ package io.github.brunomotta.teamtask.entity;
 
 import io.github.brunomotta.teamtask.entity.role.UsersRole;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name = "users")
-public class Users {
+public class Users implements UserDetails {
+
+    public Users(UUID id, String name, String email, UsersRole role){
+        this.name = name;
+        this.email = email;
+        this.role = role;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,77 +44,36 @@ public class Users {
     private UsersRole role;
 
     @CreationTimestamp
+    @Column(name = "create_at")
     private LocalDateTime createAt;
 
-    public UUID getId() {
-        return id;
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority("ROLE" + role.name()));
     }
 
-    public void setId(UUID id) {
-        this.id = id;
+    @Override
+    public String getUsername() {
+        return this.email;
     }
 
-    public String getName() {
-        return name;
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
     }
 
-    public String getEmail() {
-        return email;
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public UsersRole getRole() {
-        return role;
-    }
-
-    public void setRole(UsersRole role) {
-        this.role = role;
-    }
-
-    public LocalDateTime getCreateAt() {
-        return createAt;
-    }
-
-    public void setCreateAt(LocalDateTime createAt) {
-        this.createAt = createAt;
-    }
-
-    public Users(){
-
-    }
-
-    public Users(UUID id, String name, String email, String password, UsersRole role, LocalDateTime createAt){
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.role = role;
-        this.createAt = createAt;
-    }
-
-    public Users(UUID id, String name, String email, UsersRole role){
-        this.name = name;
-        this.email = email;
-        this.role = role;
-
-
-    }
-
-
-
 }
