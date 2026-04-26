@@ -2,6 +2,7 @@ package io.github.brunomotta.teamtask.entity;
 
 import io.github.brunomotta.teamtask.entity.role.UsersRole;
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -23,6 +24,7 @@ public class Users {
     @Enumerated(EnumType.STRING)
     private UsersRole role;
 
+    @CreationTimestamp
     private LocalDateTime createAt;
 
     public UUID getId() {
@@ -86,9 +88,11 @@ public class Users {
         this.createAt = createAt;
     }
 
-    public Users(UUID id, String name, String email){
+    public Users(UUID id, String name, String email, UsersRole role){
         this.name = name;
         this.email = email;
+        this.role = role;
+
 
     }
 
