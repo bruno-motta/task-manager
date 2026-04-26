@@ -5,20 +5,17 @@ import io.github.brunomotta.teamtask.dto.response.UsersResponseDto;
 import io.github.brunomotta.teamtask.entity.Users;
 import io.github.brunomotta.teamtask.mappers.UsersMappers;
 import io.github.brunomotta.teamtask.repository.UsersRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+@RequiredArgsConstructor
 @Service
 public class UsersService {
 
     private final UsersRepository usersRepository;
-
     private final PasswordEncoder passwordEncoder;
 
-    public UsersService(UsersRepository usersRepository, PasswordEncoder passwordEncoder){
-        this.usersRepository = usersRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
 
     public UsersResponseDto createUsers(UsersRequestDto usersRequestDto){
         validateEmail(usersRequestDto.email());
