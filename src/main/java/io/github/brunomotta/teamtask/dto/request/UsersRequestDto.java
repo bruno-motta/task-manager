@@ -1,6 +1,5 @@
 package io.github.brunomotta.teamtask.dto.request;
 
-import io.github.brunomotta.teamtask.entity.role.UsersRole;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -18,10 +17,6 @@ public record UsersRequestDto(
 
         @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&.#_-])[A-Za-z\\d@$!%*?&.#_-]{8,}$"
                 , message = "A senha deve ter no mínimo 8 caracteres, 1 letra maiúscula, 1 minúscula, 1 número e 1 caractere especial.")
-        String password,
-
-        UsersRole role
-
-
+        String password
 ) {
 }
