@@ -3,6 +3,7 @@ package io.github.brunomotta.teamtask.service;
 import io.github.brunomotta.teamtask.dto.request.UsersRequestDto;
 import io.github.brunomotta.teamtask.dto.response.UsersResponseDto;
 import io.github.brunomotta.teamtask.entity.Users;
+import io.github.brunomotta.teamtask.entity.role.UsersRole;
 import io.github.brunomotta.teamtask.mappers.UsersMappers;
 import io.github.brunomotta.teamtask.repository.UsersRepository;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +25,7 @@ public class UsersService {
         users.setName(usersRequestDto.name());
         users.setEmail(usersRequestDto.email());
         users.setPassword(passwordEncoder.encode(usersRequestDto.password()));
-        users.setRole(usersRequestDto.role());
+        users.setRole(UsersRole.USER);
 
         Users savedUsers = usersRepository.save(users);
 
