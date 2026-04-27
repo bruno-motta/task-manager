@@ -7,9 +7,6 @@ import io.github.brunomotta.teamtask.entity.role.UsersRole;
 import io.github.brunomotta.teamtask.mappers.UsersMappers;
 import io.github.brunomotta.teamtask.repository.UsersRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -33,19 +30,6 @@ public class UsersService {
         Users savedUsers = usersRepository.save(users);
 
         return UsersMappers.toResponse(savedUsers);
-
-    }
-
-    public Page<UsersResponseDto> listAllUsers(String name, Pageable pageable){
-        Page<Users> page;
-
-        if(name != null && !name.isBlank()){
-            page = usersRepository.findByNameContainingIgnoreCase(name, pageable);
-        }else{
-            page = usersRepository.findAll(pageable);
-        }
-
-        return page.map(UsersMappers::toResponse);
 
     }
 
