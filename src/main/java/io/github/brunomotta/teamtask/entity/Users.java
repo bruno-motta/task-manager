@@ -24,10 +24,9 @@ import java.util.UUID;
 @Table(name = "users")
 public class Users implements UserDetails {
 
-    public Users(UUID id, String name, String email, UsersRole role){
+    public Users(UUID id, String name, String email){
         this.name = name;
         this.email = email;
-        this.role = role;
     }
 
     @Id

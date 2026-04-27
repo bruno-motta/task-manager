@@ -10,8 +10,8 @@ public class UsersMappers {
         return new Users(
                 null,
                 requestDto.name(),
-                requestDto.email(),
-                requestDto.role()
+                requestDto.email()
+
         );
     }
 
