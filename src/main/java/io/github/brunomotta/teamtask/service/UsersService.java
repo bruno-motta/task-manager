@@ -33,6 +33,19 @@ public class UsersService {
 
     }
 
+    public Page<UsersResponseDto> listAllUsersbyName(String name, Pageable pageable){
+        Page<Users> page;
+
+        if(name != null && !name.isBlank()){
+            page = usersRepository.findByNameContainingIgnoreCase(name, pageable);
+        }else{
+            page = usersRepository.findAll(pageable);
+        }
+
+        return page.map(UsersMappers::toResponse);
+
+    }
+
     private void validateEmail(String email) {
         if (usersRepository.findByEmail(email).isPresent()) {
             throw new RuntimeException("E-mail já cadastrado");
