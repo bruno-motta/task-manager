@@ -36,7 +36,7 @@ public class UsersService {
 
     }
 
-    public Page<UsersResponseDto> listAllUsers(String name, Pageable pageable){
+    public Page<UsersResponseDto> listAllUsersbyName(String name, Pageable pageable){
         Page<Users> page;
 
         if(name != null && !name.isBlank()){

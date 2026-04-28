@@ -4,23 +4,30 @@ import io.github.brunomotta.teamtask.dto.request.UsersRequestDto;
 import io.github.brunomotta.teamtask.dto.response.UsersResponseDto;
 import io.github.brunomotta.teamtask.service.UsersService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
 
     public final UsersService usersService;
 
-    public AuthController(UsersService usersService){
-        this.usersService = usersService;
-    }
-
     @PostMapping("/register")
     public ResponseEntity<UsersResponseDto> register(@Valid @RequestBody UsersRequestDto requestDto){
         return ResponseEntity.status(HttpStatus.CREATED).body(usersService.createUsers(requestDto));
     }
+
+
+
+
+
+
 }
