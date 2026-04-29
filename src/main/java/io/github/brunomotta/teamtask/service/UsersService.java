@@ -12,6 +12,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @RequiredArgsConstructor
 @Service
 public class UsersService {
@@ -45,6 +47,20 @@ public class UsersService {
         }
 
         return page.map(UsersMappers::toResponse);
+
+    }
+
+    public UsersResponseDto searchById(UUID id){
+        Users userId = usersRepository.findById(id).orElseThrow(
+                () -> new RuntimeException("USUARIO NÃO ENCONTRADO POR ID!"));
+        return UsersMappers.toResponse(userId);
+
+    }
+
+    public UsersResponseDto searchByEmail(String email){
+        Users userMail = usersRepository.findByEmail(email).orElseThrow(
+                () -> new RuntimeException("USUARIO NÃO ENCONTRADO POR EMAIL!"));
+        return UsersMappers.toResponse(userMail);
 
     }
 
