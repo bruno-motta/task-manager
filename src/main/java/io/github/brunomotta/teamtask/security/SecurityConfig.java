@@ -1,4 +1,4 @@
-package io.github.brunomotta.teamtask.config;
+package io.github.brunomotta.teamtask.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
